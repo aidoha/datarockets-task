@@ -1,4 +1,4 @@
-import Typography from './components/typography';
+import Typography from './components/common/typography';
 import { COLORS } from './constants';
 
 const TITLE = 'SPLITTER';
