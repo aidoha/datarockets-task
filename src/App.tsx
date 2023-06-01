@@ -1,15 +1,18 @@
-import Typography from './components/common/typography';
-import { COLORS } from './constants';
-
-const TITLE = 'SPLITTER';
+import Header from './components/header';
+import InputsContainer from './components/inputs-container';
+import CalculatorContextProvider from './store/calculatore-context';
 
 function App() {
 	return (
-		<div>
-			<Typography variant="h1" textAlign="center" color={COLORS.cyan.very_dark_grayish}>
-				{TITLE}
-			</Typography>
-		</div>
+		<CalculatorContextProvider>
+			<Header />
+			<div className="flex flex-row justify-between w-2/3 bg-white p-8 rounded-xl m-auto">
+				<div>
+					<InputsContainer />
+				</div>
+				<div>output</div>
+			</div>
+		</CalculatorContextProvider>
 	);
 }
 
