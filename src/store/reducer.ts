@@ -6,11 +6,11 @@ export interface State {
 	total: string;
 }
 
-interface Action {
-	// type: keyof typeof actions;
-	type: any;
-	payload: string;
-}
+// interface Action {
+// 	// type: keyof typeof actions;
+// 	type: any;
+// 	payload?: string;
+// }
 
 export const initialState = {
 	bill: '0',
@@ -23,9 +23,10 @@ export const initialState = {
 export const actions = {
 	UPDATE_BILL: 'UPDATE_BILL',
 	UPDATE_PEOPLE_NUMBER: 'UPDATE_PEOPLE_NUMBER',
+	RESET_ALL: 'RESET_ALL',
 };
 
-const calculatorReducer = (state: State, action: Action) => {
+const calculatorReducer = (state: State, action: any) => {
 	const { type, payload } = action;
 	switch (type) {
 		case actions.UPDATE_BILL:
@@ -38,6 +39,8 @@ const calculatorReducer = (state: State, action: Action) => {
 				...state,
 				peopleNumber: payload,
 			};
+		case actions.RESET_ALL:
+			return initialState;
 		default:
 			return state;
 	}

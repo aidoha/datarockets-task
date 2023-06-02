@@ -20,6 +20,7 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 		updatePeopleNumberValue: (peopleNumber: string) => {
 			dispatch({ type: actions.UPDATE_PEOPLE_NUMBER, payload: peopleNumber });
 		},
+		resetAll: () => dispatch({ type: actions.RESET_ALL }),
 	};
 
 	return <CalculatorContext.Provider value={value}>{children}</CalculatorContext.Provider>;
