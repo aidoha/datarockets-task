@@ -23,6 +23,9 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 		updateTipPercentage: (tipPercentage: string) => {
 			dispatch({ type: actions.UPDATE_TIP_PERCENTAGE, payload: tipPercentage });
 		},
+		updateCustomTipPercentage: (customTipPercentage: string) => {
+			dispatch({ type: actions.UPDATE_CUSTOM_TIP_PERCENTAGE, payload: customTipPercentage });
+		},
 		resetAll: () => dispatch({ type: actions.RESET_ALL }),
 	};
 
