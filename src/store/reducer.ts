@@ -23,6 +23,7 @@ export const initialState = {
 export const actions = {
 	UPDATE_BILL: 'UPDATE_BILL',
 	UPDATE_PEOPLE_NUMBER: 'UPDATE_PEOPLE_NUMBER',
+	UPDATE_TIP_PERCENTAGE: 'UPDATE_TIP_PERCENTAGE',
 	RESET_ALL: 'RESET_ALL',
 };
 
@@ -38,6 +39,11 @@ const calculatorReducer = (state: State, action: any) => {
 			return {
 				...state,
 				peopleNumber: payload,
+			};
+		case actions.UPDATE_TIP_PERCENTAGE:
+			return {
+				...state,
+				tip: payload,
 			};
 		case actions.RESET_ALL:
 			return initialState;

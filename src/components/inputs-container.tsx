@@ -3,10 +3,11 @@ import { CalculatorContext } from '../store/calculatore-context';
 import Input from './common/input';
 import IconDollar from '../icons/dollar';
 import IconPerson from '../icons/person';
+import TipContainer from './tip-container';
 
 const InputsContainer = () => {
 	const {
-		state: { bill, peopleNumber },
+		state: { bill, peopleNumber, tip },
 		updateBillValue,
 		updatePeopleNumberValue,
 	} = useContext(CalculatorContext);
@@ -31,6 +32,7 @@ const InputsContainer = () => {
 				value={bill}
 				onChange={onChangeBill}
 			/>
+			<TipContainer tip={tip} />
 			<Input
 				id="people-number"
 				name="people-number"
