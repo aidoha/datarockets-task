@@ -7,9 +7,11 @@ import TipContainer from './tip-container';
 
 const InputsContainer = () => {
 	const {
-		state: { bill, peopleNumber, tip },
+		state: { bill, peopleNumber, tip, customTip },
 		updateBillValue,
 		updatePeopleNumberValue,
+		updateTipPercentage,
+		updateCustomTipPercentage,
 	} = useContext(CalculatorContext);
 
 	const onChangeBill = (value: string) => {
@@ -32,7 +34,7 @@ const InputsContainer = () => {
 				value={bill}
 				onChange={onChangeBill}
 			/>
-			<TipContainer tip={tip} />
+			<TipContainer {...{ tip, customTip, updateTipPercentage, updateCustomTipPercentage }} />
 			<Input
 				id="people-number"
 				name="people-number"

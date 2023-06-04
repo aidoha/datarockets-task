@@ -27,11 +27,11 @@ const Input = ({
 	};
 	return (
 		<div>
-			<label htmlFor={id} className="text-sm">
+			<label htmlFor={id} className="text-sm text-cyan-very_dark_grayish font-bold">
 				{label}
 			</label>
 			<div className="relative">
-				<div className="absolute top-1/2 left-0 px-4 -translate-y-2/4">{Icon}</div>
+				{Icon && <div className="absolute top-1/2 left-0 px-4 -translate-y-2/4">{Icon}</div>}
 				<input
 					id={id}
 					name={name}
@@ -40,7 +40,9 @@ const Input = ({
 					value={value}
 					onChange={({ target: { value } }) => onChange(value)}
 					onFocus={onFocus}
-					className="bg-cyan-light_grayish w-full h-11 border-box rounded py-2 pl-8 pr-4 outline-cyan-strong cursor-pointer text-right text-cyan-very_dark_grayish text-lg font-bold"
+					className={`bg-cyan-light_grayish w-full h-11 border-box rounded py-2 ${
+						Icon && 'pl-8'
+					} pr-4 outline-cyan-strong cursor-pointer text-right text-cyan-very_dark_grayish text-lg font-bold md:text-base`}
 				/>
 			</div>
 		</div>

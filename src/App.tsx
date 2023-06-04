@@ -7,11 +7,11 @@ function App() {
 	return (
 		<CalculatorContextProvider>
 			<Header />
-			<div className="flex flex-col justify-between bg-white p-8 rounded-xl m-0 gap-8 md:m-auto md:w-1/2 md:flex-row">
-				<div className="md:w-1/2">
+			<div className="flex flex-col justify-between bg-white p-8 rounded-xl m-0 gap-8 lg:m-auto lg:w-2/3 lg:flex-row xl:w-1/2">
+				<div className="w-full lg:w-1/2">
 					<InputsContainer />
 				</div>
-				<div className="md:w-1/2">
+				<div className="w-full lg:w-1/2">
 					<OutputContainer />
 				</div>
 			</div>

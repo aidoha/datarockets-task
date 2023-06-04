@@ -23,21 +23,23 @@ const OutputContainer = () => {
 	const onReset = () => resetAll();
 
 	return (
-		<div className="bg-cyan-very_dark_grayish p-8 rounded-xl w-full relative">
-			{outputs.map(({ label, value }, index) => (
-				<div
-					key={`${label}.${index}`}
-					className="flex flex-row items-center justify-between first:m-0 mt-8"
-				>
-					<div>
-						<p className="text-white font-bold text-sm">{label}</p>
-						<p className="text-cyan-very_light_grayish text-xs">/ person</p>
+		<div className="bg-cyan-very_dark_grayish p-8 rounded-xl w-full h-full flex flex-col justify-between">
+			<div>
+				{outputs.map(({ label, value }, index) => (
+					<div
+						key={`${label}.${index}`}
+						className="flex flex-row items-center justify-between first:m-0 mt-8"
+					>
+						<div>
+							<p className="text-white font-bold text-sm">{label}</p>
+							<p className="text-cyan-very_light_grayish text-xs">/ person</p>
+						</div>
+						<div>
+							<h1 className="text-cyan-strong font-bold ml-2 text-3xl">${value}</h1>
+						</div>
 					</div>
-					<div>
-						<h1 className="text-cyan-strong font-bold ml-2 text-3xl">${value}</h1>
-					</div>
-				</div>
-			))}
+				))}
+			</div>
 			<div className="mt-8">
 				<Button onClick={onReset}>{BUTTON_TITLE}</Button>
 			</div>
