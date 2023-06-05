@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import reducer, { State, Actions, initialState } from './reducer';
+import reducer, { State, Actions, initialState, ValidationErrorPayload } from './reducer';
 
 type UpdateFunctionType = (value: string) => void;
 
@@ -11,6 +11,7 @@ interface CalculatorContextType {
 	updateCustomTipPercentage: UpdateFunctionType;
 	updateTipAmount: UpdateFunctionType;
 	updateTotal: UpdateFunctionType;
+	updateValidationErrors: (validationError: ValidationErrorPayload) => void;
 	resetAll: () => void;
 }
 
@@ -38,6 +39,9 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 		},
 		updateTotal: (total: string) => {
 			dispatch({ type: Actions.UPDATE_TOTAL, payload: total });
+		},
+		updateValidationErrors: (validationError: ValidationErrorPayload) => {
+			dispatch({ type: Actions.UPDATE_VALIDATION_ERRORS, payload: validationError });
 		},
 		resetAll: () => dispatch({ type: Actions.RESET_ALL }),
 	};

@@ -4,16 +4,18 @@ import Input from './common/input';
 import IconDollar from '../icons/dollar';
 import IconPerson from '../icons/person';
 import TipContainer from './tip-container';
+import ValidationService from '../services/validation-service';
 
 const InputsContainer = () => {
 	const {
-		state: { bill, peopleNumber, tip, customTip },
+		state: { bill, peopleNumber, tip, customTip, validationErrors },
 		updateBillValue,
 		updatePeopleNumberValue,
 		updateTipPercentage,
 		updateCustomTipPercentage,
 		updateTipAmount,
 		updateTotal,
+		updateValidationErrors,
 	} = useContext(CalculatorContext);
 
 	const onChangeBill = useCallback(
@@ -31,6 +33,13 @@ const InputsContainer = () => {
 		},
 		[updatePeopleNumberValue]
 	);
+
+	const onBlurPeopleNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { value, id } = event.target;
+
+		const message = ValidationService.validate(value, "Can't be zero");
+		updateValidationErrors({ [id]: message });
+	};
 
 	useEffect(() => {
 		const shouldApplyCalculations =
@@ -63,6 +72,8 @@ const InputsContainer = () => {
 				Icon={<IconPerson />}
 				value={peopleNumber}
 				onChange={onChangePeopleNumber}
+				onBlur={onBlurPeopleNumber}
+				error={validationErrors['people-number']}
 			/>
 		</div>
 	);

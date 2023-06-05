@@ -7,12 +7,15 @@ export interface State {
 	peopleNumber: string;
 	tipAmount: string;
 	total: string;
+	validationErrors: ValidationErrorPayload;
 }
 
 interface Action {
 	type: Actions;
-	payload?: string;
+	payload?: string | ValidationErrorPayload;
 }
+
+export type ValidationErrorPayload = { [id: string]: string | null };
 
 export const initialState = {
 	bill: '0',
@@ -21,6 +24,7 @@ export const initialState = {
 	peopleNumber: '0',
 	tipAmount: '0.00',
 	total: '0.00',
+	validationErrors: {},
 };
 
 export enum Actions {
@@ -30,6 +34,7 @@ export enum Actions {
 	UPDATE_CUSTOM_TIP_PERCENTAGE = 'UPDATE_CUSTOM_TIP_PERCENTAGE',
 	UPDATE_TIP_AMOUNT = 'UPDATE_TIP_AMOUNT',
 	UPDATE_TOTAL = 'UPDATE_TOTAL',
+	UPDATE_VALIDATION_ERRORS = 'UPDATE_VALIDATION_ERRORS',
 	RESET_ALL = 'RESET_ALL',
 }
 
@@ -65,6 +70,14 @@ const calculatorReducer: Reducer<State, Action> = (state, action): State => {
 			return {
 				...state,
 				total: payload as string,
+			};
+		case Actions.UPDATE_VALIDATION_ERRORS:
+			return {
+				...state,
+				validationErrors: {
+					...state.validationErrors,
+					...(payload as ValidationErrorPayload),
+				},
 			};
 		case Actions.RESET_ALL:
 			return initialState;
