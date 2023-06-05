@@ -18,21 +18,15 @@ const TipContainer = ({
 	updateTipPercentage,
 	updateCustomTipPercentage,
 }: TipContainerProps) => {
-	const onChangeTip = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const { value } = event.target;
-			updateTipPercentage(value);
-		},
-		[updateTipPercentage]
-	);
+	const onChangeTip = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { value } = event.target;
+		updateTipPercentage(value);
+	};
 
-	const onChangeCustomTip = useCallback(
-		(value: string) => {
-			updateTipPercentage('');
-			updateCustomTipPercentage(value);
-		},
-		[updateTipPercentage, updateCustomTipPercentage]
-	);
+	const onChangeCustomTip = (value: string) => {
+		updateTipPercentage('');
+		updateCustomTipPercentage(value);
+	};
 
 	const onFocusCustomTip = () => updateTipPercentage('');
 
