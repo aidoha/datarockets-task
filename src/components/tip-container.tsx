@@ -1,6 +1,7 @@
 import RadioButton from './common/radio-button';
 import Input from './common/input';
 import { radioButtons } from '../constants';
+import { useCallback } from 'react';
 
 interface TipContainerProps {
 	tip: string;
@@ -17,14 +18,23 @@ const TipContainer = ({
 	updateTipPercentage,
 	updateCustomTipPercentage,
 }: TipContainerProps) => {
-	const onChangeTip = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = event.target;
-		updateTipPercentage(value);
-	};
+	const onChangeTip = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const { value } = event.target;
+			updateTipPercentage(value);
+		},
+		[updateTipPercentage]
+	);
 
-	const onChangeCustomTip = (value: string) => {
-		updateCustomTipPercentage(value);
-	};
+	const onChangeCustomTip = useCallback(
+		(value: string) => {
+			updateTipPercentage('');
+			updateCustomTipPercentage(value);
+		},
+		[updateTipPercentage, updateCustomTipPercentage]
+	);
+
+	const onFocusCustomTip = () => updateTipPercentage('');
 
 	return (
 		<div className="my-8">
@@ -47,6 +57,7 @@ const TipContainer = ({
 					placeholder="Custom"
 					value={customTip}
 					onChange={onChangeCustomTip}
+					customOnFocus={onFocusCustomTip}
 				/>
 			</div>
 		</div>

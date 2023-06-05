@@ -1,13 +1,20 @@
-import React, { Dispatch, PropsWithChildren } from 'react';
-import reducer, { State, actions, initialState } from './reducer';
+import React, { PropsWithChildren } from 'react';
+import reducer, { State, Actions, initialState } from './reducer';
 
-// interface CalculatorContextType {
-// 	state: State;
-// 	updateBillValue: (value: number) => void;
-// 	updatePeopleNumberValue: (value: number) => void;
-// }
+type UpdateFunctionType = (value: string) => void;
 
-export const CalculatorContext = React.createContext<any>({});
+interface CalculatorContextType {
+	state: State;
+	updateBillValue: UpdateFunctionType;
+	updatePeopleNumberValue: UpdateFunctionType;
+	updateTipPercentage: UpdateFunctionType;
+	updateCustomTipPercentage: UpdateFunctionType;
+	updateTipAmount: UpdateFunctionType;
+	updateTotal: UpdateFunctionType;
+	resetAll: () => void;
+}
+
+export const CalculatorContext = React.createContext({} as CalculatorContextType);
 
 const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -15,18 +22,24 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const value = {
 		state,
 		updateBillValue: (bill: string) => {
-			dispatch({ type: actions.UPDATE_BILL, payload: bill });
+			dispatch({ type: Actions.UPDATE_BILL, payload: bill });
 		},
 		updatePeopleNumberValue: (peopleNumber: string) => {
-			dispatch({ type: actions.UPDATE_PEOPLE_NUMBER, payload: peopleNumber });
+			dispatch({ type: Actions.UPDATE_PEOPLE_NUMBER, payload: peopleNumber });
 		},
 		updateTipPercentage: (tipPercentage: string) => {
-			dispatch({ type: actions.UPDATE_TIP_PERCENTAGE, payload: tipPercentage });
+			dispatch({ type: Actions.UPDATE_TIP_PERCENTAGE, payload: tipPercentage });
 		},
 		updateCustomTipPercentage: (customTipPercentage: string) => {
-			dispatch({ type: actions.UPDATE_CUSTOM_TIP_PERCENTAGE, payload: customTipPercentage });
+			dispatch({ type: Actions.UPDATE_CUSTOM_TIP_PERCENTAGE, payload: customTipPercentage });
 		},
-		resetAll: () => dispatch({ type: actions.RESET_ALL }),
+		updateTipAmount: (tipAmount: string) => {
+			dispatch({ type: Actions.UPDATE_TIP_AMOUNT, payload: tipAmount });
+		},
+		updateTotal: (total: string) => {
+			dispatch({ type: Actions.UPDATE_TOTAL, payload: total });
+		},
+		resetAll: () => dispatch({ type: Actions.RESET_ALL }),
 	};
 
 	return <CalculatorContext.Provider value={value}>{children}</CalculatorContext.Provider>;

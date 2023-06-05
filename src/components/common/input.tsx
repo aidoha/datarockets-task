@@ -8,6 +8,7 @@ interface InputProps {
 	Icon?: React.ReactNode;
 	value: string;
 	onChange: (value: string) => void;
+	customOnFocus?: () => void;
 }
 
 const Input = ({
@@ -18,6 +19,7 @@ const Input = ({
 	Icon,
 	value,
 	onChange,
+	customOnFocus,
 }: PropsWithChildren<InputProps>) => {
 	const onFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
@@ -39,7 +41,7 @@ const Input = ({
 					placeholder={placeholder}
 					value={value}
 					onChange={({ target: { value } }) => onChange(value)}
-					onFocus={onFocus}
+					onFocus={customOnFocus ? customOnFocus : onFocus}
 					className={`bg-cyan-light_grayish w-full h-11 border-box rounded py-2 ${
 						Icon && 'pl-8'
 					} pr-4 outline-cyan-strong cursor-pointer text-right text-cyan-very_dark_grayish text-lg font-bold md:text-base`}

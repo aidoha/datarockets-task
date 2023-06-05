@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { CalculatorContext } from '../store/calculatore-context';
 import Input from './common/input';
 import IconDollar from '../icons/dollar';
@@ -12,17 +12,38 @@ const InputsContainer = () => {
 		updatePeopleNumberValue,
 		updateTipPercentage,
 		updateCustomTipPercentage,
+		updateTipAmount,
+		updateTotal,
 	} = useContext(CalculatorContext);
 
-	const onChangeBill = (value: string) => {
-		const newValue = value.replace(/[^0-9.]/g, '');
-		updateBillValue(newValue);
-	};
+	const onChangeBill = useCallback(
+		(value: string) => {
+			const newValue = value.replace(/[^0-9.]/g, '');
+			updateBillValue(newValue);
+		},
+		[updateBillValue]
+	);
 
-	const onChangePeopleNumber = (value: string) => {
-		const newValue = value.replace(/[^0-9]/g, '');
-		updatePeopleNumberValue(newValue);
-	};
+	const onChangePeopleNumber = useCallback(
+		(value: string) => {
+			const newValue = value.replace(/[^0-9]/g, '');
+			updatePeopleNumberValue(newValue);
+		},
+		[updatePeopleNumberValue]
+	);
+
+	useEffect(() => {
+		const shouldApplyCalculations =
+			parseFloat(bill) > 0 && parseInt(peopleNumber, 10) && (!!tip || !!customTip);
+
+		if (shouldApplyCalculations) {
+			const tipAmount = (Number(bill) * (Number(tip || customTip) / 100)) / Number(peopleNumber);
+			updateTipAmount(tipAmount.toFixed(2));
+
+			const totalBill = Number(Number(bill) / Number(peopleNumber) + Number(tipAmount.toFixed(2)));
+			updateTotal(totalBill.toFixed(2));
+		}
+	}, [bill, peopleNumber, tip, customTip]);
 
 	return (
 		<div>
