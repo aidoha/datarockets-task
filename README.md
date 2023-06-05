@@ -26,7 +26,8 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Screen Shot 2023-06-05 at 16 00 29](https://github.com/aidoha/tip-calculator/assets/27284530/b8a162ab-c320-46ea-9559-ab9c231684a2)
+![Screen Shot 2023-06-05 at 16 00 15](https://github.com/aidoha/tip-calculator/assets/27284530/561f46c2-24be-404b-8b50-43f3cd3d2eb3)
 
 ### Links
 
